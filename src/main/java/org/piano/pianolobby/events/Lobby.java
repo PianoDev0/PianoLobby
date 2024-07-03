@@ -27,11 +27,9 @@ import org.piano.pianolobby.system.PianoLobby;
 public class Lobby implements Listener {
 
     private final PianoLobby plugin;
-    private final LuckPerms luckPerms;
 
-    public Lobby(PianoLobby plugin, LuckPerms luckPerms) {
+    public Lobby(PianoLobby plugin) {
         this.plugin = plugin;
-        this.luckPerms = luckPerms;
     }
 
     private boolean isFeatureEnabled(String feature) {
@@ -42,20 +40,16 @@ public class Lobby implements Listener {
     public void onEntityDamage(EntityDamageByEntityEvent event) {
         if (!isFeatureEnabled("entity-damage")) return;
 
-        if (event.getEntity() instanceof Player && event.getDamager() instanceof Player) {
-            Player damaged = (Player) event.getEntity();
-            Player damager = (Player) event.getDamager();
-
+        if (event.getEntity() instanceof Player damaged && event.getDamager() instanceof Player damager) {
             if (damager.isOp() || damager.hasPermission("nohit.bypass")) {
                 return;
             }
 
             if (damaged.isOp() || damaged.hasPermission("nohit.bypass")) {
                 event.setCancelled(true);
-                return;
+            } else {
+                event.setCancelled(true);
             }
-
-            event.setCancelled(true);
         }
     }
 
@@ -63,67 +57,30 @@ public class Lobby implements Listener {
     public void onEntityDamage(EntityDamageEvent event) {
         if (!isFeatureEnabled("fall-damage")) return;
 
-        if (event.getEntity() instanceof Player) {
-            if (event.getCause() == EntityDamageEvent.DamageCause.FALL) {
-                event.setCancelled(true);
-            }
+        if (event.getEntity() instanceof Player && event.getCause() == EntityDamageEvent.DamageCause.FALL) {
+            event.setCancelled(true);
         }
     }
 
-
     @EventHandler
-    public void onJoin(PlayerJoinEvent e) {
-        if (!isFeatureEnabled("player-join")) return;
-
-        Player player = e.getPlayer();
-        User user = luckPerms.getUserManager().getUser(player.getUniqueId());
-        String joinMessage = plugin.getConfig().getString("join-message-format");
-
-
-
-        if (user != null) {
-            String prefix = user.getCachedData().getMetaData(QueryOptions.defaultContextualOptions()).getPrefix();
-            String playerName = player.getName();
-            String coloredPrefix = prefix != null && !prefix.isEmpty() ? ChatColor.translateAlternateColorCodes('&', prefix) : "";
-            String coloredPlayerName = ChatColor.WHITE + ChatColor.BOLD.toString() + playerName;
-            String finalName = coloredPrefix + " " + coloredPlayerName;
-            joinMessage = joinMessage.replace("{player}", finalName);
-            joinMessage = ChatColor.translateAlternateColorCodes('&', joinMessage);
+    public void onPlayerJoin(PlayerJoinEvent event) {
+        Player player = event.getPlayer();
+        if (isFeatureEnabled("lobby-effects")) {
+            setUnlimitedEffects(player);
         }
-        e.setJoinMessage(joinMessage);
-        if (!isFeatureEnabled("lobby-effects")) return;
-        setUnlimitedEffects(player);
+
+        setDayTime();
     }
 
     private void setUnlimitedEffects(Player player) {
         player.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, Integer.MAX_VALUE, 4, true, false));
         player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 4, true, false));
     }
-
-    @EventHandler
-    public void onLeave(PlayerQuitEvent e) {
-        if (!isFeatureEnabled("player-quit")) return;
-
-        Player player = e.getPlayer();
-        User user = luckPerms.getUserManager().getUser(player.getUniqueId());
-        String quitMessage = plugin.getConfig().getString("quit-message-format");
-        if (user != null) {
-            String prefix = user.getCachedData().getMetaData(QueryOptions.defaultContextualOptions()).getPrefix();
-            String playerName = player.getName();
-            String coloredPrefix = prefix != null && !prefix.isEmpty() ? ChatColor.translateAlternateColorCodes('&', prefix) : "";
-            String coloredPlayerName = ChatColor.WHITE + ChatColor.BOLD.toString() + playerName;
-            String finalName = coloredPrefix + " " + coloredPlayerName;
-            quitMessage = quitMessage.replace("{player}", finalName);
-            quitMessage = ChatColor.translateAlternateColorCodes('&', quitMessage);
-        }
-        e.setQuitMessage(quitMessage);
-    }
-
     @EventHandler
     public void onBlockBreak(BlockBreakEvent event) {
         if (!isFeatureEnabled("block-break")) return;
 
-        if (event.getPlayer().isOp() || event.getPlayer().hasPermission("nobreak.bypass")) {
+        if (event.getPlayer().hasPermission("nobreak.bypass")) {
             return;
         }
         event.setCancelled(true);
@@ -133,7 +90,7 @@ public class Lobby implements Listener {
     public void onBlockPlace(BlockPlaceEvent event) {
         if (!isFeatureEnabled("block-place")) return;
 
-        if (event.getPlayer().isOp() || event.getPlayer().hasPermission("nobuild.bypass")) {
+        if (event.getPlayer().hasPermission("nobuild.bypass")) {
             return;
         }
         event.setCancelled(true);
@@ -143,11 +100,8 @@ public class Lobby implements Listener {
     public void onEntityBlockChange(EntityChangeBlockEvent event) {
         if (!isFeatureEnabled("entity-block-change")) return;
 
-        if (event.getEntity() instanceof Player) {
-            Player player = (Player) event.getEntity();
-            if (player.isOp() || player.hasPermission("nobreak.bypass")) {
-                return;
-            }
+        if (event.getEntity() instanceof Player player && player.hasPermission("nobreak.bypass")) {
+            return;
         }
         event.setCancelled(true);
     }
@@ -156,7 +110,7 @@ public class Lobby implements Listener {
     public void onPlayerDropItem(PlayerDropItemEvent event) {
         if (!isFeatureEnabled("player-drop-item")) return;
 
-        if (event.getPlayer().isOp() || event.getPlayer().hasPermission("noitem.bypass")) {
+        if (event.getPlayer().hasPermission("noitem.bypass")) {
             return;
         }
         event.setCancelled(true);
@@ -166,7 +120,7 @@ public class Lobby implements Listener {
     public void onPlayerPickup(PlayerPickupItemEvent event) {
         if (!isFeatureEnabled("player-pickup-item")) return;
 
-        if (event.getPlayer().isOp() || event.getPlayer().hasPermission("noitem.bypass")) {
+        if (event.getPlayer().hasPermission("noitem.bypass")) {
             return;
         }
         event.setCancelled(true);
@@ -180,14 +134,10 @@ public class Lobby implements Listener {
         Inventory inventory = event.getInventory();
 
         if (inventory.getType().toString().contains("CHEST") || inventory.getType().toString().contains("ENDER_CHEST")) {
-            if (event.getPlayer() instanceof Player) {
-                Player player = (Player) event.getPlayer();
-
-                if (player.isOp() || player.hasPermission("nobreak.bypass")) {
-                    return;
-                }
-                event.setCancelled(true);
+            if (event.getPlayer() instanceof Player player && player.hasPermission("nobreak.bypass")) {
+                return;
             }
+            event.setCancelled(true);
         }
     }
 
@@ -196,19 +146,12 @@ public class Lobby implements Listener {
         if (!isFeatureEnabled("pl-command-block")) return;
 
         String command = event.getMessage().toLowerCase();
-        if (command.equals("/bukkit:plugins") || command.equals("/bukkit:pl") || command.equals("/plugins") || command.equals("/pl")){
+        if (command.equalsIgnoreCase("/bukkit:plugins") || command.equalsIgnoreCase("/bukkit:pl") || command.equalsIgnoreCase("/plugins") || command.equalsIgnoreCase("/pl")) {
             if (!event.getPlayer().isOp()) {
-                event.getPlayer().sendMessage("§fPlugins(3): §aNot, Your, Business");
+                event.getPlayer().sendMessage(ChatColor.RED + "Plugins(3): Not, Your, Business");
                 event.setCancelled(true);
             }
         }
-    }
-
-    @EventHandler
-    public void onPlayerJoin(PlayerJoinEvent event) {
-        if (!isFeatureEnabled("player-join")) return;
-
-        setDayTime();
     }
 
     public void startTask() {
@@ -219,7 +162,7 @@ public class Lobby implements Listener {
             public void run() {
                 setDayTime();
             }
-        }.runTaskTimer(Bukkit.getPluginManager().getPlugin("PianoLobby"), 0L, 24000L);
+        }.runTaskTimer(plugin, 0L, 24000L);
     }
 
     private void setDayTime() {

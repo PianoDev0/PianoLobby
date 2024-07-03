@@ -18,46 +18,60 @@ public class Other implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if (command.getName().equalsIgnoreCase("die")) {
-            if (sender instanceof Player) {
-                Player p = (Player) sender;
-                p.setHealth(0.0);
-                p.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("die-command-success")));
-                return true;
-            }
-        } else if (command.getName().equalsIgnoreCase("discord")) {
-            if (sender instanceof Player) {
-                Player p = (Player) sender;
-                p.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("discord-command-message")));
-                return true;
-            }
-        } else if (command.getName().equalsIgnoreCase("ping")) {
-            if (sender instanceof Player) {
-                Player p = (Player) sender;
-                int ping = p.getPing();
-                p.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("ping-command-message").replace("%ping%", String.valueOf(ping))));
-                return true;
-            }
-        } else if (command.getName().equalsIgnoreCase("about")) {
-            if (sender instanceof Player) {
-                Player p = (Player) sender;
-                p.sendMessage("§1§lABOUT PIANOLOBBY: ");
-                p.sendMessage("§BVERSION: 1.0 ");
-                p.sendMessage("§3PLUGIN BY: PianoDev_ ");
-                return true;
-            } else if (sender instanceof ConsoleCommandSender c) {
-                c.sendMessage("§1§lABOUT PIANOLOBBY: ");
-                c.sendMessage("§BVERSION: 1.0 ");
-                c.sendMessage("§3PLUGIN BY: PianoDev_ ");
-                return true;
-            }
-        } else if (command.getName().equalsIgnoreCase("web")) {
-            if (sender instanceof Player) {
-                Player p = (Player) sender;
-                p.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("web-command-message")));
-                return true;
-            }
+        switch (command.getName().toLowerCase()) {
+            case "die":
+                if (sender instanceof Player) {
+                    Player player = (Player) sender;
+                    player.setHealth(0.0);
+                    player.sendMessage(ChatColor.translateAlternateColorCodes('&',
+                            plugin.getConfig().getString("die-command-success")));
+                    return true;
+                } else {
+                    sender.sendMessage(ChatColor.RED + "This command can only be used by players.");
+                    return false;
+                }
+
+            case "discord":
+                if (sender instanceof Player) {
+                    Player player = (Player) sender;
+                    player.sendMessage(ChatColor.translateAlternateColorCodes('&',
+                            plugin.getConfig().getString("discord-command-message")));
+                    return true;
+                } else {
+                    sender.sendMessage(ChatColor.RED + "This command can only be used by players.");
+                    return false;
+                }
+
+            case "about":
+                String aboutMessage = "§1§lABOUT PIANOLOBBY: \n"
+                        + "§BVERSION: 1.0 \n"
+                        + "§3PLUGIN BY: PianoDev_";
+                if (sender instanceof Player) {
+                    Player player = (Player) sender;
+                    player.sendMessage(aboutMessage);
+                    return true;
+                } else if (sender instanceof ConsoleCommandSender) {
+                    ConsoleCommandSender console = (ConsoleCommandSender) sender;
+                    console.sendMessage(aboutMessage);
+                    return true;
+                } else {
+                    sender.sendMessage(ChatColor.RED + "This command is not available.");
+                    return false;
+                }
+
+            case "web":
+                if (sender instanceof Player) {
+                    Player player = (Player) sender;
+                    player.sendMessage(ChatColor.translateAlternateColorCodes('&',
+                            plugin.getConfig().getString("web-command-message")));
+                    return true;
+                } else {
+                    sender.sendMessage(ChatColor.RED + "This command can only be used by players.");
+                    return false;
+                }
+
+            default:
+                return false;
         }
-        return false;
     }
-    }
+}

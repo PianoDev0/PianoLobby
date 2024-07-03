@@ -1,7 +1,9 @@
 name: PianoLobby
-version: '${project.version}'
+version: 1.0-SNAPSHOT
 main: org.piano.pianolobby.system.PianoLobby
-api-version: '1.20'
+api-version: 1.20
+softdepend:
+  - LuckPerms
 permissions:
   nobreak.bypass:
     description: Umožňuje hráči obejít omezení, že nesmí ničit bloky.
@@ -24,9 +26,6 @@ commands:
     permission-message: 'Na toto nemáš permise!'
   discord:
     description: 'Discord Invite'
-    usage: '/<command>'
-  ping:
-    description: 'vypíše ping serveru'
     usage: '/<command>'
   heal:
     description: 'vyhealuje hráče'
