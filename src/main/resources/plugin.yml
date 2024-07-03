@@ -1,7 +1,21 @@
-name: PianoCore
+name: PianoLobby
 version: '${project.version}'
-main: org.piano.joinleave.system.PianoCore
+main: org.piano.pianolobby.system.PianoLobby
 api-version: '1.20'
+permissions:
+  nobreak.bypass:
+    description: Umožňuje hráči obejít omezení, že nesmí ničit bloky.
+    default: op
+  nobuild.bypass:
+    description: Umožňuje hráči obejít omezení, že nesmí pokládat bloky.
+    default: op
+  nohit.bypass:
+    description: Umožňuje hráči obejít omezení, že nesmí hitovat ostatní hráče.
+    default: op
+  noitem.bypass:
+    description: Umožňuje hráči obejít omezení, že nesmí sbírat a vyhazovat itemy.
+    default: op
+
 commands:
   die:
     description: 'Jednoduchá cesta jak si vzít život'
@@ -14,16 +28,6 @@ commands:
   ping:
     description: 'vypíše ping serveru'
     usage: '/<command>'
-  godmode:
-    description: 'zapne godmode'
-    usage: '/<command>'
-    permission: pianocore.godmode
-    permission-message: 'Na toto nemáš permise!'
-  vanish:
-    description: 'zapne vanish'
-    usage: '/<command>'
-    permission: pianocore.vanish
-    permission-message: 'Na toto nemáš permise!'
   heal:
     description: 'vyhealuje hráče'
     usage: '/<command>'
@@ -65,11 +69,6 @@ commands:
     usage: '/<command>'
     permission: pianocore.inventory
     permission-message: 'Na toto nemáš oprávnění!'
-  pihelp:
-    description: 'Vypíše příkazy'
-    usage: '/<command>'
-    permission: pianocore.help
-    permission-message: 'Na toto nemáš oprávnění!'
   sun:
     description: 'Nastaví slunečno'
     usage: '/<command>'
@@ -95,9 +94,6 @@ commands:
     usage: '/<command>'
     permission: pianocore.time
     permission-message: 'Na toto nemáš oprávnění!'
-  home:
-    description: 'Teleportuje vás k domu'
-    usage: '/<command>'
   freeze:
     description: 'Zamrazí hráče'
     usage: '/<command>'
@@ -110,14 +106,4 @@ commands:
     description: 'Reloadne config a další soubory'
     usage: '/<command>'
     permission: pianocore.reload
-    permission-message: 'Na toto nemáš oprávnění!'
-  repairall:
-    description: 'Opraví všechny tvoje věci'
-    usage: '/<command>'
-    permission: pianocore.repair
-    permission-message: 'Na toto nemáš oprávnění!'
-  repair:
-    description: 'Opraví věc kterou máš v ruce'
-    usage: '/<command>'
-    permission: pianocore.repair
     permission-message: 'Na toto nemáš oprávnění!'

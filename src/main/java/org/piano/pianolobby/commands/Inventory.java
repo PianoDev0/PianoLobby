@@ -1,4 +1,4 @@
-package org.piano.joinleave.commands;
+package org.piano.pianolobby.commands;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -6,13 +6,13 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.piano.joinleave.system.PianoCore;
+import org.piano.pianolobby.system.PianoLobby;
 
 public class Inventory implements CommandExecutor {
 
-    private final PianoCore plugin;
+    private final PianoLobby plugin;
 
-    public Inventory(PianoCore plugin) {
+    public Inventory(PianoLobby plugin) {
         this.plugin = plugin;
     }
 

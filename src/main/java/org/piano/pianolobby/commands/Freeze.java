@@ -1,4 +1,4 @@
-package org.piano.joinleave.commands;
+package org.piano.pianolobby.commands;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -6,7 +6,8 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.piano.joinleave.system.PianoCore;
+import org.piano.pianolobby.system.PianoLobby;
+
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
@@ -14,9 +15,9 @@ import java.util.UUID;
 public class Freeze implements CommandExecutor {
 
     private final Set<UUID> frozenPlayers = new HashSet<>();
-    private final PianoCore plugin;
+    private final PianoLobby plugin;
 
-    public Freeze(PianoCore plugin) {
+    public Freeze(PianoLobby plugin) {
         this.plugin = plugin;
     }
 

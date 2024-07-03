@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/PianoCore.iml" filepath="$PROJECT_DIR$/PianoCore.iml" />
+      <module fileurl="file://$PROJECT_DIR$/PianoLobby.iml" filepath="$PROJECT_DIR$/PianoLobby.iml" />
     </modules>
   </component>
 </project>

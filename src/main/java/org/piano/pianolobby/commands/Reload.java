@@ -1,16 +1,16 @@
-package org.piano.joinleave.commands;
+package org.piano.pianolobby.commands;
 
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.piano.joinleave.system.PianoCore;
+import org.piano.pianolobby.system.PianoLobby;
 
 public class Reload implements CommandExecutor {
 
-    private final PianoCore plugin;
+    private final PianoLobby plugin;
 
-    public Reload(PianoCore plugin) {
+    public Reload(PianoLobby plugin) {
         this.plugin = plugin;
     }
 

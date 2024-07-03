@@ -1,3 +1,16 @@
+entity-damage: true
+fall-damage: true
+player-join: true
+player-quit: true
+block-break: true
+block-place: true
+entity-block-change: true
+player-drop-item: true
+player-pickup-item: true
+inventory-open: true
+pl-command-block: true
+day-time: true
+lobby-effects: true
 
 # PRAVIDLA SERVERU
 rules:
@@ -14,8 +27,8 @@ rules:
 death-message-format: "&c{player} zemřel {cause}"
 
 # JOIN/LEAVE MESSAGE
-join-message-format: "§2§lHráč {player} se připojil!"
-quit-message-format: "§4§lHráč {player} se odpojil."
+join-message-format: "{player} se připojil/a!"
+quit-message-format: "{player} se odpojil/a!"
 
 # FLY A FLYSPEED
 fly-on-message: "&aLétání bylo zapnuto pro hráče {player}!"
@@ -27,10 +40,6 @@ flyspeed-set-message: "&aRychlost létání byla nastavena na {speed}!"
 gamemode-set-message: "&aNastaveno na {gamemode}!"
 gamemode-set-message-other: "&aNastaveno na {gamemode} pro hráče {player}!"
 
-
-# VANISH
-vanish-on-message: "&aVanish byl zapnut pro hráče {player}!"
-vanish-off-message: "&cVanish byl vypnut pro hráče {player}!"
 
 # TIME
 time-set-message-day: "&aČas nastaven na denní!"
@@ -53,13 +62,6 @@ freeze-unfrozen-message: "&aHráč {player} byl odmrazen."
 freeze-player-not-online: "&cHráč s tímto jménem není online."
 freeze-usage-message: "&cPoužití: /freeze <hráč>"
 
-# GODMODE
-godmode-enabled-message: "&aGodMode byl zapnut!"
-godmode-disabled-message: "&cGodMode byl vypnut!"
-godmode-enabled-message-other: "&aGodMode byl zapnut pro hráče {player}!"
-godmode-disabled-message-other: "&cGodMode byl vypnut pro hráče {player}!"
-godmode-player-not-online: "&cTento hráč není online!"
-godmode-usage-message: "&cPoužití: /godmode [hráč]"
 
 # HELP
 help-command-title: "&aSeznam příkazů:"
@@ -106,13 +108,7 @@ reload-command-message: "&aPianoCore byl úspěšně reloadnut!"
 # OSTATNÍ
 die-command-success: "&cÚspěšně sis vzal život!"
 discord-command-message: "&bPozvánka na náš server: https://discord.gg/..."
-repairall-success-message: "§aVšechny tvoje předměty byly opraveny."
-repair-success-message: "&aVáš aktuální nástroj nebo zbroj byl opraven."
 ping-command-message: "&bPing: %ping%ms"
-about-command-message:
-  - "&9&lO PianoCore:"
-  - "&bVerze: 1.0"
-  - "&3Vývojář pluginu: PianoDev_"
 web-command-message: "&bOdkaz na náš web: https://..."
 
 

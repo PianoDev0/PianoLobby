@@ -1,16 +1,16 @@
-package org.piano.joinleave.commands;
+package org.piano.pianolobby.commands;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.*;
 import org.bukkit.entity.Player;
-import org.piano.joinleave.system.PianoCore;
+import org.piano.pianolobby.system.PianoLobby;
 
 public class Heal implements CommandExecutor {
 
-    private final PianoCore plugin;
+    private final PianoLobby plugin;
 
-    public Heal(PianoCore plugin) {
+    public Heal(PianoLobby plugin) {
         this.plugin = plugin;
     }
 

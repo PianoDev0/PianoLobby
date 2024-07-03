@@ -1,63 +1,62 @@
-package org.piano.joinleave.system;
+package org.piano.pianolobby.system;
 
+import net.luckperms.api.LuckPerms;
+import net.luckperms.api.LuckPermsProvider;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.piano.joinleave.commands.*;
-import org.piano.joinleave.events.DeathMessage;
-import org.piano.joinleave.events.PlayerConnection;
+import org.piano.pianolobby.commands.*;
+import org.piano.pianolobby.events.*;
 
-public final class PianoCore extends JavaPlugin {
+public final class PianoLobby extends JavaPlugin {
 
-    public static PianoCore Instance;
-
+    private static PianoLobby instance;
+    private LuckPerms luckPerms;
 
     @Override
     public void onEnable() {
-        // Plugin startup logic
-
-        Instance = this;
-        Bukkit.getConsoleSender().sendMessage("[PianoCore] Plugin byl správně načten!!");
+        instance = this;
+        Bukkit.getConsoleSender().sendMessage("[PianoLobby] Plugin byl správně načten!!");
+        this.luckPerms = LuckPermsProvider.get();
 
         PluginManager pm = Bukkit.getPluginManager();
-        pm.registerEvents(new PlayerConnection(this), PianoCore.Instance);
-        pm.registerEvents(new DeathMessage(this), PianoCore.Instance);
+        pm.registerEvents(new Lobby(this, luckPerms), this);
 
         getConfig().options().copyDefaults(true);
         saveDefaultConfig();
 
-        getCommand("godmode").setExecutor(new GodMode(this));
         getCommand("gmc").setExecutor(new Gamemodes(this));
         getCommand("gms").setExecutor(new Gamemodes(this));
         getCommand("gmsp").setExecutor(new Gamemodes(this));
         getCommand("fly").setExecutor(new Fly(this));
         getCommand("heal").setExecutor(new Heal(this));
-        getCommand("flyspeed").setExecutor(new Flyspeed(this));
+        getCommand("flyspeed").setExecutor(new Fly(this));
         getCommand("die").setExecutor(new Other(this));
         getCommand("ping").setExecutor(new Other(this));
         getCommand("discord").setExecutor(new Other(this));
         getCommand("web").setExecutor(new Other(this));
-        getCommand("repair").setExecutor(new Other(this));
-        getCommand("repairall").setExecutor(new Other(this));
         getCommand("about").setExecutor(new Other(this));
         getCommand("inventory").setExecutor(new Inventory(this));
-        getCommand("pihelp").setExecutor(new Help(this));
-        getCommand("vanish").setExecutor(new Vanish(this));
         getCommand("day").setExecutor(new Time(this));
         getCommand("night").setExecutor(new Time(this));
         getCommand("sun").setExecutor(new Weather(this));
         getCommand("thunder").setExecutor(new Weather(this));
         getCommand("rain").setExecutor(new Weather(this));
-        getCommand("home").setExecutor(new Home(this));
         getCommand("freeze").setExecutor(new Freeze(this));
         getCommand("rules").setExecutor(new Rules(this));
         getCommand("pireload").setExecutor(new Reload(this));
-
     }
+
     @Override
     public void onDisable() {
         // Plugin shutdown logic
     }
+
+    public static PianoLobby getInstance() {
+        return instance;
+    }
+
+    public LuckPerms getLuckPerms() {
+        return luckPerms;
+    }
 }
-
-

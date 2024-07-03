@@ -1,19 +1,18 @@
-package org.piano.joinleave.commands;
+package org.piano.pianolobby.commands;
 
 import org.bukkit.ChatColor;
-import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
-import org.piano.joinleave.system.PianoCore;
+import org.piano.pianolobby.system.PianoLobby;
 
 public class Other implements CommandExecutor {
 
-    private final PianoCore plugin;
+    private final PianoLobby plugin;
 
-    public Other(PianoCore plugin) {
+    public Other(PianoLobby plugin) {
         this.plugin = plugin;
     }
 
@@ -39,21 +38,17 @@ public class Other implements CommandExecutor {
                 p.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("ping-command-message").replace("%ping%", String.valueOf(ping))));
                 return true;
             }
-        } else if (command.getName().equalsIgnoreCase("repairall")) {
-            if (sender instanceof Player p) {
-                repairAllItems(p);
-                p.sendMessage(ChatColor.GREEN + plugin.getConfig().getString("repairall-success-message"));
-                return true;
-            } else {
-                sender.sendMessage(ChatColor.RED + "Tento příkaz může používat pouze hráč.");
-                return true;
-            }
         } else if (command.getName().equalsIgnoreCase("about")) {
             if (sender instanceof Player) {
                 Player p = (Player) sender;
-                for (String line : plugin.getConfig().getStringList("about-command-message")) {
-                    p.sendMessage(ChatColor.translateAlternateColorCodes('&', line));
-                }
+                p.sendMessage("§1§lABOUT PIANOLOBBY: ");
+                p.sendMessage("§BVERSION: 1.0 ");
+                p.sendMessage("§3PLUGIN BY: PianoDev_ ");
+                return true;
+            } else if (sender instanceof ConsoleCommandSender c) {
+                c.sendMessage("§1§lABOUT PIANOLOBBY: ");
+                c.sendMessage("§BVERSION: 1.0 ");
+                c.sendMessage("§3PLUGIN BY: PianoDev_ ");
                 return true;
             }
         } else if (command.getName().equalsIgnoreCase("web")) {
@@ -65,17 +60,4 @@ public class Other implements CommandExecutor {
         }
         return false;
     }
-
-    private void repairAllItems(Player player) {
-        for (ItemStack item : player.getInventory().getContents()) {
-            if (item != null && item.getType() != Material.AIR) {
-                item.setDurability((short) 0);
-            }
-        }
-
-        ItemStack handItem = player.getInventory().getItemInMainHand();
-        if (handItem != null && handItem.getType() != Material.AIR) {
-            handItem.setDurability((short) 0);
-        }
     }
-}

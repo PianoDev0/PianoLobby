@@ -1,4 +1,4 @@
-package org.piano.joinleave.commands;
+package org.piano.pianolobby.commands;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -6,15 +6,15 @@ import org.bukkit.GameMode;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
 import org.bukkit.command.ConsoleCommandSender;
-import org.piano.joinleave.system.PianoCore;
+import org.bukkit.entity.Player;
+import org.piano.pianolobby.system.PianoLobby;
 
 public class Gamemodes implements CommandExecutor {
 
-    private final PianoCore plugin;
+    private final PianoLobby plugin;
 
-    public Gamemodes(PianoCore plugin) {
+    public Gamemodes(PianoLobby plugin) {
         this.plugin = plugin;
     }
 
