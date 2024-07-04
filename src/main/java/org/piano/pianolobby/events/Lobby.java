@@ -78,7 +78,7 @@ public class Lobby implements Listener {
     }
     @EventHandler
     public void onBlockBreak(BlockBreakEvent event) {
-        if (!isFeatureEnabled("block-break")) return;
+        if (!isFeatureEnabled("no-block-break")) return;
 
         if (event.getPlayer().hasPermission("nobreak.bypass")) {
             return;
@@ -88,7 +88,7 @@ public class Lobby implements Listener {
 
     @EventHandler
     public void onBlockPlace(BlockPlaceEvent event) {
-        if (!isFeatureEnabled("block-place")) return;
+        if (!isFeatureEnabled("no-block-place")) return;
 
         if (event.getPlayer().hasPermission("nobuild.bypass")) {
             return;
