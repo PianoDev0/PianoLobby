@@ -20,7 +20,7 @@ permissions:
 
 commands:
   die:
-    description: 'Jednoduchá cesta jak si vzít život'
+    description: 'Jednoduchá cesta, jak si vzít život.'
     usage: '/<command>'
     permission: pianolobby.die
     permission-message: 'Na toto nemáš permise!'

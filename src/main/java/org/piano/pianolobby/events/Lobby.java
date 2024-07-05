@@ -144,7 +144,7 @@ public class Lobby implements Listener {
         String command = event.getMessage().toLowerCase();
         if (command.equalsIgnoreCase("/bukkit:plugins") || command.equalsIgnoreCase("/bukkit:pl") || command.equalsIgnoreCase("/plugins") || command.equalsIgnoreCase("/pl")) {
             if (!event.getPlayer().isOp()) {
-                event.getPlayer().sendMessage(ChatColor.WHITE + "Plugins(3):" + ChatColor.GREEN + " Not, Your, Business");
+                event.getPlayer().sendMessage(ChatColor.WHITE + "Plugins(3): " + ChatColor.GREEN + "Not, Your, Business");
                 event.setCancelled(true);
             }
         }
