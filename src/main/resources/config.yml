@@ -2,8 +2,8 @@ entity-damage: true
 fall-damage: true
 player-join: true
 player-quit: true
-block-break: true
-block-place: true
+no-block-break: true
+no-block-place: true
 entity-block-change: true
 player-drop-item: true
 player-pickup-item: true
