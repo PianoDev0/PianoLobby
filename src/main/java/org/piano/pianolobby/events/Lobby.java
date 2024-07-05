@@ -1,8 +1,5 @@
 package org.piano.pianolobby.events;
 
-import net.luckperms.api.LuckPerms;
-import net.luckperms.api.model.user.User;
-import net.luckperms.api.query.QueryOptions;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.World;
@@ -18,7 +15,6 @@ import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.event.player.*;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
-import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -148,7 +144,7 @@ public class Lobby implements Listener {
         String command = event.getMessage().toLowerCase();
         if (command.equalsIgnoreCase("/bukkit:plugins") || command.equalsIgnoreCase("/bukkit:pl") || command.equalsIgnoreCase("/plugins") || command.equalsIgnoreCase("/pl")) {
             if (!event.getPlayer().isOp()) {
-                event.getPlayer().sendMessage(ChatColor.RED + "Plugins(3): Not, Your, Business");
+                event.getPlayer().sendMessage(ChatColor.WHITE + "Plugins(3):" + ChatColor.GREEN + " Not, Your, Business");
                 event.setCancelled(true);
             }
         }

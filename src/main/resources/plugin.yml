@@ -22,7 +22,7 @@ commands:
   die:
     description: 'Jednoduchá cesta jak si vzít život'
     usage: '/<command>'
-    permission: pianocore.die
+    permission: pianolobby.die
     permission-message: 'Na toto nemáš permise!'
   discord:
     description: 'Discord Invite'
@@ -30,32 +30,32 @@ commands:
   heal:
     description: 'vyhealuje hráče'
     usage: '/<command>'
-    permission: pianocore.Heal
+    permission: pianolobby.Heal
     permission-message: 'Na toto nemáš permise!'
   gmc:
     description: 'nastaví creative'
     usage: '/<command>'
-    permission: pianocore.gm
+    permission: pianolobby.gm
     permission-message: 'Na toto nemáš permise!'
   gms:
     description: 'nastaví survival'
     usage: '/<command>'
-    permission: pianocore.gm
+    permission: pianolobby.gm
     permission-message: 'Na toto nemáš permise!'
   gmsp:
     description: 'nastaví spectator'
     usage: '/<command>'
-    permission: pianocore.gm
+    permission: pianolobby.gm
     permission-message: 'Na toto nemáš permise!'
   fly:
     description: 'zapne/vypne létání'
     usage: '/<command>'
-    permission: pianocore.fly
+    permission: pianolobby.fly
     permission-message: 'Na toto nemáš permise!'
   flyspeed:
     description: 'nastaví rychlost létání'
     usage: '/<command> <rychlost>'
-    permission: pianocore.flyspeed
+    permission: pianolobby.flyspeed
     permission-message: 'Na toto nemáš permise!'
   about:
     description: 'Napíše info o pluginu'
@@ -66,37 +66,37 @@ commands:
   inventory:
     description: 'Otevře inventář hráče'
     usage: '/<command>'
-    permission: pianocore.inventory
+    permission: pianolobby.inventory
     permission-message: 'Na toto nemáš oprávnění!'
   sun:
     description: 'Nastaví slunečno'
     usage: '/<command>'
-    permission: pianocore.weather
+    permission: pianolobby.weather
     permission-message: 'Na toto nemáš oprávnění!'
   thunder:
     description: 'Nastaví bouřku'
     usage: '/<command>'
-    permission: pianocore.weather
+    permission: pianolobby.weather
     permission-message: 'Na toto nemáš oprávnění!'
   rain:
     description: 'Nastaví deštné počasí'
     usage: '/<command>'
-    permission: pianocore.time
+    permission: pianolobby.time
     permission-message: 'Na toto nemáš oprávnění!'
   day:
     description: 'Nastaví den'
     usage: '/<command>'
-    permission: pianocore.time
+    permission: pianolobby.time
     permission-message: 'Na toto nemáš oprávnění!'
   night:
     description: 'Nastaví noc'
     usage: '/<command>'
-    permission: pianocore.time
+    permission: pianolobby.time
     permission-message: 'Na toto nemáš oprávnění!'
   freeze:
     description: 'Zamrazí hráče'
     usage: '/<command>'
-    permission: pianocore.freeze
+    permission: pianolobby.freeze
     permission-message: 'Na toto nemáš oprávnění!'
   rules:
     description: 'Vypíše pravidla'
@@ -104,5 +104,5 @@ commands:
   pireload:
     description: 'Reloadne config a další soubory'
     usage: '/<command>'
-    permission: pianocore.reload
+    permission: pianolobby.reload
     permission-message: 'Na toto nemáš oprávnění!'
