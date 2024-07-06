@@ -32,7 +32,6 @@ public class Fly implements CommandExecutor {
                     if (target == null) {
                         player.sendMessage(ChatColor.RED + "Tento hráč není online!");
                     } else {
-                        // Toggle fly mode for the specified target player
                         toggleFly(player, target);
                     }
                 } else {
