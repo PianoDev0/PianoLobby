@@ -23,7 +23,6 @@ public class Fly implements CommandExecutor {
                 Player player = (Player) sender;
 
                 if (args.length == 0) {
-                    // Toggle fly mode for the player who issued the command
                     toggleFly(player, player);
                 } else if (args.length == 1) {
                     String playerName = args[0];
@@ -32,7 +31,6 @@ public class Fly implements CommandExecutor {
                     if (target == null) {
                         player.sendMessage(ChatColor.RED + "Tento hráč není online!");
                     } else {
-                        // Toggle fly mode for the specified target player
                         toggleFly(player, target);
                     }
                 } else {
