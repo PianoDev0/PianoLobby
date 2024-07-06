@@ -11,6 +11,7 @@ inventory-open: true
 pl-command-block: true
 day-time: true
 lobby-effects: true
+double-jump: true
 
 # PRAVIDLA SERVERU
 rules:
