@@ -22,9 +22,8 @@ public final class PianoLobby extends JavaPlugin {
 
         if (Bukkit.getPluginManager().getPlugin("LuckPerms") != null) {
             this.luckPerms = LuckPermsProvider.get();
-            Bukkit.getConsoleSender().sendMessage("[PianoLobby] LuckPerms found and initialized.");
         } else {
-            getLogger().warning("LuckPerms not found! Some features may not work.");
+            getLogger().warning("LuckPerms nebyly nalezeny! Některé věci nemusí fungovat.");
         }
 
         PluginManager pm = Bukkit.getPluginManager();
