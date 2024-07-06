@@ -1,8 +1,6 @@
 package org.piano.pianolobby.events;
 
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.World;
+import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -18,6 +16,7 @@ import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.util.Vector;
 import org.piano.pianolobby.system.PianoLobby;
 
 public class Lobby implements Listener {
@@ -164,6 +163,32 @@ public class Lobby implements Listener {
     private void setDayTime() {
         for (World world : Bukkit.getWorlds()) {
             world.setTime(1000L);
+        }
+    }
+    @EventHandler
+    public void onPlayerToggleFlight(PlayerToggleFlightEvent event) {
+        if (!isFeatureEnabled("double-jump")) return;
+        Player player = event.getPlayer();
+
+        if (player.getGameMode() == org.bukkit.GameMode.CREATIVE) return;
+
+        event.setCancelled(true);
+        player.setAllowFlight(false);
+        player.setFlying(false);
+
+        Vector jump = player.getLocation().getDirection().multiply(0.5).setY(1);
+        player.setVelocity(player.getVelocity().add(jump));
+
+        player.getWorld().playSound(player.getLocation(), Sound.FIREWORK_LAUNCH, 1, 1);
+    }
+
+    @EventHandler
+    public void onPlayerMove(PlayerMoveEvent event) {
+        if (!isFeatureEnabled("double-jump")) return;
+        Player player = event.getPlayer();
+        Location loc = player.getLocation();
+        if (loc.subtract(0, 1, 0).getBlock().getType() != Material.AIR && !player.isFlying()) {
+            player.setAllowFlight(true);
         }
     }
 }
